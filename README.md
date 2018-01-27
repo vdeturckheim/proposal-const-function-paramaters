@@ -12,6 +12,14 @@ Right now, in order to prevent someone from re-assigning a parameter within a fu
 similar one) are necessary:
 
 ```js
+function F() {
+  const [foo, bar] = arguments;
+}
+```
+
+But sometimes, it does not make sens to have all parameters in this state:
+
+```js
 function F(/*foo, bar, baz*/) {
   const foo =  arguments[0]; // foo must not be reassigned
   let bar = arguments[1]; // bar might be reassigned
@@ -47,3 +55,24 @@ function F(const foo) {
 }
 F({ x: 0 });
 ```
+
+## Alternatives
+
+The choice of another keyword might be possible instead of `const`.
+
+* The `final` keyword is used in Java to reach a same goal
+
+or even, a symbol:
+
+* `%`
+* `^`
+
+Signatures would look like:
+```
+function F(% foo) {}
+function F(^ foo) {}
+```
+
+The symbols `_`, `*` and `&` might be misleading to use.
+
+
