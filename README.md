@@ -55,6 +55,52 @@ function F(const foo) {
 }
 F({ x: 0 });
 ```
+### Extension
+
+#### Destructed parameters
+
+This syntax could be extended to destructed function parameters:
+
+```js
+function F({ const foo, bar }) {
+  bar = 1;
+  foo = 1; // TypeError: Assignment to constant variable.
+}
+```
+In that case, when all parameters are expected to be constant a shorthand can be used:
+
+```js
+function F(const { foo, bar }) { // this is the same as function F({ const foo, const bar })
+
+  foo = 10 // TypeError: Assignment to constant variable.
+}
+```
+
+#### Spread parameters
+
+This syntax could be used with spread parameters to prevent manipulation of the defined parameter:
+
+```js
+function F(...const args) {
+  args = []; // TypeError: Assignment to constant variable.
+}
+```
+
+```js
+function F(...[const a, b]) {
+  b = 1;
+  a = 0; // TypeError: Assignment to constant variable.
+}
+```
+
+
+```js
+function F(...const [a, b]) {
+  a = 0; // TypeError: Assignment to constant variable. Would be the same for b
+}
+```
+
+
 
 ## Alternatives
 
@@ -70,7 +116,7 @@ or even, a symbol:
 Signatures would look like:
 ```js
 function F(% foo) {}
-function F(^ foo) {}
+function F( foo) {}
 ```
 
 The symbols `_`, `*` and `&` might be misleading to use.
