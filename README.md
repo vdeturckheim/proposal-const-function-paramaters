@@ -49,7 +49,7 @@ function F(const foo, bar, const baz) {
 This would not seal nor freeze objects passed as parameters (see proposal https://github.com/keithamus/proposal-object-freeze-seal-syntax#freezing-a-functions-destructured-options-bag).
 
 For instance`` the following code will not throw any exception when executed:
-```js`
+```js
 function F(const foo) {
   foo.x = 1;
 }
@@ -68,7 +68,7 @@ or even, a symbol:
 * `^`
 
 Signatures would look like:
-```
+```js
 function F(% foo) {}
 function F(^ foo) {}
 ```
